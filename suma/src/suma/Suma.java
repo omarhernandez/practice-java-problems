@@ -19,68 +19,114 @@ Salida:
 24
  */
 package suma;
+
 import java.io.*;
 import java.util.ArrayList;
+
 /**
  *
  * @author omar
  */
 public class Suma {
-    
-      private static String FILE_NAME_INPUT = "data.in";
-      private static String FILE_NAME_OUTPUT = "data.out";
-    
-      public void readFile(){
-     
-        String data = "";
-        String[] retriveData = {};
-        ArrayList<Integer> collectionData = new ArrayList<Integer>();
- 
-        try {
-            
+
+    private static String FILE_NAME_INPUT = "data.in";
+    private static String FILE_NAME_OUTPUT = "data.out";
+    private ArrayList<Integer> collectionData = new ArrayList<Integer>();
+//------------------------------------------------------------------------------    
 // intentamos leer el archivo y manejamos los posibles errores
 //------------------------------------------------------------------------------
-// leer archivo para obtener el valor entero
+
+    public void readFile() {
+
+        String data = "";
+        String[] retriveData = {};
+
+
+        try {
+
 
             BufferedReader bf = new BufferedReader(new FileReader(FILE_NAME_INPUT));
-            
-            int  counter;
+
+            int _counter;
             int _number;
             while ((data = bf.readLine()) != null) {//leemos una linea readLine del data.in
-                
+
                 retriveData = data.split(" ");
-                counter = 0;
-                
+                _counter = 0;
+
                 for (String number : retriveData) {
-                    
+
                     //cast a Entero
                     _number = Integer.parseInt(number);
-                    
+
                     // sumamos todos los numeros de la misma fila
-                    counter += _number; 
-     
+                    _counter += _number;
+
                 }
-   
-                collectionData.add(counter);
- 
+
+                collectionData.add(_counter);
+
             }
- 
-           
-             System.out.print( collectionData.get(0)+"\n"+collectionData.get(1));
-            
- 
+
+
+            writeFile();
+
         } catch (Exception e) {
-            
+
 // cachamos el error
-            System.out.print("Hay un error al leer el archivo "+FILE_NAME_INPUT);
-            
+            System.out.print("Hay un error al leer el archivo " + FILE_NAME_INPUT);
+
         }
-     
-     }
- 
+
+    }
+
+//------------------------------------------------------------------------------    
+// BEGIN - intentamos Escribir el archivo 
+//------------------------------------------------------------------------------
+    public void writeFile() {
+        BufferedWriter bw = null;
+
+        try {
+// intentamos leer el archivo y manejamos los posibles errores
+
+            bw = new BufferedWriter(new FileWriter(FILE_NAME_OUTPUT));
+
+            for (int index = 0; index < collectionData.size(); index++) {
+
+                bw.write(String.valueOf(collectionData.get(index)));
+                bw.write("\n");
+            }
+
+
+
+        } catch (Exception e) {
+// cachamos el error
+
+            System.out.print("Hay un error al escribir el archivo " + FILE_NAME_OUTPUT);
+
+        } finally {
+//limpiamos el error
+            //Close the BufferedWriter
+            try {
+                if (bw != null) {
+                    bw.flush();
+                    bw.close();
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+
+
+    }
+    //------------------------------------------------------------------------------    
+// END - intentamos Escribir el archivo 
+//------------------------------------------------------------------------------
+
     public static void main(String[] args) {
-        
-    	new Suma().readFile();
-        
+
+        new Suma().readFile();
+
     }
 }
