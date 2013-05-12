@@ -12,9 +12,10 @@ import java.util.ArrayList;
  */
 public class Suma {
     
-      private static String FILE_NAME = "input.txt";
-
-     public void readFile(){
+      private static String FILE_NAME_INPUT = "data.in";
+      private static String FILE_NAME_OUTPUT = "data.out";
+    
+      public void readFile(){
      
             String data = "";
         String[] retriveData = {};
@@ -26,7 +27,7 @@ public class Suma {
 //------------------------------------------------------------------------------
 // leer archivo para obtener el valor entero
 
-            BufferedReader bf = new BufferedReader(new FileReader(FILE_NAME));
+            BufferedReader bf = new BufferedReader(new FileReader(FILE_NAME_INPUT));
 
 
             while ((data = bf.readLine()) != null) {
@@ -42,11 +43,18 @@ public class Suma {
 
             }
  
+            for(int index = 0 ; index  < collectionData.size() ; index ++){
+
+                System.out.print("data "+collectionData.get(index));
+                
+                }
+
+            
 
         } catch (Exception e) {
             
 // cachamos el error
-            System.out.print("Hay un error al leer el archivo "+FILE_NAME);
+            System.out.print("Hay un error al leer el archivo "+FILE_NAME_INPUT);
             
         }
      
