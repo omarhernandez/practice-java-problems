@@ -22,6 +22,9 @@ package suma;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +35,7 @@ public class Suma {
     private static String FILE_NAME_INPUT = "data.in";
     private static String FILE_NAME_OUTPUT = "data.out";
     private ArrayList<Integer> collectionData = new ArrayList<Integer>();
+    private String ERROR_HANDLER_FILE = "Hay un error con el archivo ";
 //------------------------------------------------------------------------------    
 // intentamos leer el archivo y manejamos los posibles errores
 //------------------------------------------------------------------------------
@@ -40,8 +44,26 @@ public class Suma {
 
         String data = "";
         String[] retriveData = {};
-
-
+        
+        
+        /*
+        try {
+            System.setIn(new FileInputStream(new File(FILE_NAME_INPUT)));
+            System.setOut(new PrintStream(new File(FILE_NAME_OUTPUT)));
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Suma.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        Scanner in = new Scanner(System.in);
+        while(in.hasNextInt()){
+            System.out.println(in.nextInt() + in.nextInt());
+        }
+        
+        */
+        
+        
+        
         try {
 
 
@@ -74,7 +96,7 @@ public class Suma {
         } catch (Exception e) {
 
 // cachamos el error
-            System.out.print("Hay un error al leer el archivo " + FILE_NAME_INPUT);
+            System.out.print(ERROR_HANDLER_FILE + FILE_NAME_INPUT);
 
         }
 
@@ -101,8 +123,9 @@ public class Suma {
 
         } catch (Exception e) {
 // cachamos el error
+            
 
-            System.out.print("Hay un error al escribir el archivo " + FILE_NAME_OUTPUT);
+            System.out.print(ERROR_HANDLER_FILE + FILE_NAME_OUTPUT);
 
         } finally {
 //limpiamos el error
@@ -117,7 +140,7 @@ public class Suma {
             }
         }
 
-
+ 
 
     }
     //------------------------------------------------------------------------------    
